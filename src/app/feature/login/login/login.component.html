@@ -2,3 +2,28 @@
   Recuerde conservar los id, no deben ser modificados
   ids = login__email, login__password, login__password-error, login__email-error, login__btn-login
 -->
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input id="login__email" type="email" formControlName="email" />
+      <div id="login__email-error" *ngIf="getEmailError()" class="error-message">{{ getEmailError() }}</div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input id="login__password" type="password" formControlName="password" />
+      <div id="login__password-error" *ngIf="getPasswordError()" class="error-message">{{ getPasswordError() }}</div>
+    </div>
+
+    <button id="login__btn-login" type="submit" [disabled]="loginForm.invalid">Login</button>
+
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+  </form>
+</div>
