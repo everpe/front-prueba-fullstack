@@ -1,0 +1,23 @@
+.h8k-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.h8k-table th,
+.h8k-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.h8k-danger {
+  background-color: #f44336;
+  color: white;
+}

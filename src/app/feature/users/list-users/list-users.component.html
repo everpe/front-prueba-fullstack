@@ -3,5 +3,69 @@
   ids = user-list__filter, user-list__table, user-list__table-item-[index], user-list__table-item-[index]-avatar, user-list__table-item-[index]-first_name, user-list__table-item-[index]-email, user-list__table-item-[index]-btn-delete
   Remplazar [index] por el valor ejemplo "user-list__table-item-0"
 -->
+<input
+  id="user-list__filter"
+  (input)="filterUsers($event)"
+  type="text"
+/>
 
-<p>list-user</p>
+<table id="user-list__table" class="h8k-table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Avatar</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUsers; let i = index" id="{{ 'user-list__table-item-' + i }}">
+      <td id="{{ 'user-list__table-item-' + i + '-email' }}">{{ user.email }}</td>
+      <td id="{{ 'user-list__table-item-' + i + '-first_name' }}">{{ user.first_name }}</td>
+      <td>
+        <img
+          [src]="user.avatar"
+          alt="Avatar"
+          id="{{ 'user-list__table-item-' + i + '-avatar' }}"
+        />
+      </td>
+      <td>
+        <button
+          (click)="onDeleteUser(user)"
+          id="{{ 'user-list__table-item-' + i + '-btn-delete' }}"
+          class="h8k-button h8k-danger"
+        >
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<!-- <table id="user-list__table" class="h8k-table">
+  <tbody>
+    <tr *ngFor="let user of filteredUsers; let i = index" [id]="'user-list__table-item-' + i">
+      <td [id]="'user-list__table-item-' + i + '-email'">{{ user.email }}</td>
+      <td [id]="'user-list__table-item-' + i + '-first_name'">{{ user.first_name }}</td>
+      <td>
+        <img
+          [src]="user.avatar"
+          alt="Avatar"
+          [id]="'user-list__table-item-' + i + '-avatar'"
+        />
+      </td>
+      <td>
+        <button
+          (click)="onDeleteUser(user)"
+          [id]="'user-list__table-item-' + i + '-btn-delete'"
+          class="h8k-button h8k-danger"
+        >
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
