@@ -57,9 +57,8 @@ export class ListUsersComponent implements OnInit {
     if (confirmDelete) {
       try {
         await this.usersService.deleteUserForIndex(user.id);
-        // alert(`Usuario ${user.first_name} ${user.last_name} eliminado con éxito`);
         this.users = this.users.filter(u => u.id !== user.id);
-        this.filteredUsers = this.users;
+        this.filteredUsers = [...this.users];
       } catch (error) {
         alert('Ocurrió un error al eliminar el usuario');
       }

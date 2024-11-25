@@ -30,7 +30,7 @@ export class UsersService {
   async createUser(data: CreateUserRequest): Promise<CreateUserResponse> {
     try {
       const response = await this.http
-        .post<CreateUserResponse>(this.apiUrl, data)
+        .post<CreateUserResponse>(`${this.apiUrl}/users`, data)
         .toPromise();
       return response;
     } catch (error) {

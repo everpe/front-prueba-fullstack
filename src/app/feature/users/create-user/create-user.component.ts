@@ -30,8 +30,8 @@ export class CreateUserComponent implements OnInit {
       const { name, job } = this.createUserForm.value;
       try {
         const response = await this.userService.createUser({ name, job });
-        alert(`User ${response.name} created with ID: ${response.id}`);
-        this.createUserForm.reset();
+        alert(`Usuario ${response.name} creado con exito`);
+        this.redirectToListUsers()
       } catch (error) {
         alert('Error creating user. Please try again.');
         console.error(error);
