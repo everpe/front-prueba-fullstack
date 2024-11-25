@@ -3,27 +3,31 @@
   ids = user-list__filter, user-list__table, user-list__table-item-[index], user-list__table-item-[index]-avatar, user-list__table-item-[index]-first_name, user-list__table-item-[index]-email, user-list__table-item-[index]-btn-delete
   Remplazar [index] por el valor ejemplo "user-list__table-item-0"
 -->
-<input
-  id="user-list__filter"
-  (input)="filterUsers($event)"
-  type="text"
-/>
+<div class="container">
 
+  <label for="">Filtrar por nombre</label>
+  <input
+  class="ml-6"
+    id="user-list__filter"
+    (input)="filterUsers($event)"
+    type="text"
+  />
 <table id="user-list__table" class="h8k-table">
   <thead>
     <tr>
-      <th>Email</th>
-      <th>First Name</th>
-      <th>Avatar</th>
-      <th>Action</th>
+      <th>Correo</th>
+      <th>Nombre</th>
+      <th>Imagen</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of filteredUsers; let i = index" id="{{ 'user-list__table-item-' + i }}">
       <td id="{{ 'user-list__table-item-' + i + '-email' }}">{{ user.email }}</td>
       <td id="{{ 'user-list__table-item-' + i + '-first_name' }}">{{ user.first_name }}</td>
-      <td>
+      <td >
         <img
+          class="avatar"
           [src]="user.avatar"
           alt="Avatar"
           id="{{ 'user-list__table-item-' + i + '-avatar' }}"
@@ -41,6 +45,7 @@
     </tr>
   </tbody>
 </table>
+</div>
 
 
 

@@ -24,7 +24,7 @@ export class ListUsersComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      const response = await this.usersService.getUsers(1, 10); // Página 1, 6 usuarios
+      const response = await this.usersService.getUsers(1, 10);
       this.users = response.data;
       this.filteredUsers = [...this.users]; // Inicializa con todos los usuarios
     } catch (error) {
@@ -33,7 +33,7 @@ export class ListUsersComponent implements OnInit {
   }
 
   filterUsers(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase().trim();
 
     // Si el filtro tiene menos de 3 caracteres, restaura la lista original
     if (filterValue.length < 3) {
@@ -41,11 +41,9 @@ export class ListUsersComponent implements OnInit {
       return;
     }
 
-    // Filtra los usuarios por coincidencia en nombre o email
-    this.filteredUsers = this.users.filter(
-      (user) =>
-        user.first_name.toLowerCase().includes(filterValue)
-    );
+    this.filteredUsers = [...this.users.filter((user) =>
+      user.first_name.toLowerCase().includes(filterValue)
+    )];
   }
 
 

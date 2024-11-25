@@ -2,43 +2,46 @@
   Recuerde conservar los id, no deben ser modificados
   ids = user-create__name, user-create__name-error, user-create__job, user-create__job-error, user-create__btn-create
 -->
-<form (ngSubmit)="onSubmit()" [formGroup]="createUserForm">
-  <div>
-    <label for="user-create__name">Nombre :</label>
-    <input
-      id="user-create__name"
-      type="text"
-      formControlName="name"
-    />
-    <span
-      id="user-create__name-error"
-      *ngIf="createUserForm.get('name')?.invalid || !createUserForm.get('job').value"
-    >
-      Name is required.
-    </span>
-  </div>
+  <div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="createUserForm">
+      <div >
+        <label for="user-create__name">Nombre :</label>
+        <input
+          id="user-create__name"
+          type="text"
+          formControlName="name"
+        />
+        <span
+          id="user-create__name-error"
+          *ngIf="createUserForm.get('name')?.invalid || !createUserForm.get('job').value"
+        >
+          Name is required.
+        </span>
+      </div>
 
-  <div>
-    <label for="user-create__job">Trabajo:</label>
-    <input
-      id="user-create__job"
-      type="text"
-      formControlName="job"
-    />
-    <span
-      id="user-create__job-error"
-      *ngIf="createUserForm.get('job')?.invalid || !createUserForm.get('job').value"
-    >
-      Job is required.
-    </span>
-  </div>
+      <div>
+        <label for="user-create__job">Trabajo:</label>
+        <input
+          id="user-create__job"
+          type="text"
+          formControlName="job"
+        />
+        <span
+          id="user-create__job-error"
+          *ngIf="createUserForm.get('job')?.invalid || !createUserForm.get('job').value"
+        >
+          Job is required.
+        </span>
+      </div>
 
-  <button
-    id="user-create__btn-create"
-    type="submit"
-    [disabled]="createUserForm.invalid"
-  >
-    Create User
-  </button>
-</form>
+      <button
+        id="user-create__btn-create"
+        type="submit"
+        [disabled]="createUserForm.invalid"
+      >
+        Crear usuario
+      </button>
+    </form>
+
+  </div>
 
