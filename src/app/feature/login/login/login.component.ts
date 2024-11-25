@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../shared/services/login/login.service';
+import { AuthTokenService } from '../shared/services/auth-token/auth-token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit{
 
   constructor(private readonly fb: FormBuilder,
               private readonly loginService: LoginService,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly authTokenService: AuthTokenService) {
 
   }
 
@@ -62,8 +64,10 @@ export class LoginComponent implements OnInit{
       const { email, password } = this.loginForm.value;
       try {
         const response = await this.loginService.login(email, password);
+        this.authTokenService.setToken(response.token);
         this.successMessage = `Login successful. Token: ${response.token}`;
         this.errorMessage = '';
+        this.redirectUsers();
       } catch (error) {
         this.errorMessage = 'Invalid credentials. Please try again.';
         this.successMessage = '';

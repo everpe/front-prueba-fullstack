@@ -12,7 +12,7 @@ import { LoginRoutingModule } from './login-routing.module';
     LoginRoutingModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
   ]
 })
 export class LoginModule {
