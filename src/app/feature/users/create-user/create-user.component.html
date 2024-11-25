@@ -12,7 +12,7 @@
     />
     <span
       id="user-create__name-error"
-      *ngIf="createUserForm.get('name')?.invalid && createUserForm.get('name')?.touched"
+      *ngIf="createUserForm.get('name')?.invalid || !createUserForm.get('job').value"
     >
       Name is required.
     </span>
@@ -27,7 +27,7 @@
     />
     <span
       id="user-create__job-error"
-      *ngIf="createUserForm.get('job')?.invalid && createUserForm.get('job')?.touched"
+      *ngIf="createUserForm.get('job')?.invalid || !createUserForm.get('job').value"
     >
       Job is required.
     </span>
