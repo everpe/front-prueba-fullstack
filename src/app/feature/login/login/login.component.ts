@@ -18,14 +18,18 @@ export class LoginComponent implements OnInit{
               private readonly loginService: LoginService,
               private readonly router: Router,
               private readonly authTokenService: AuthTokenService) {
-
+                this.loginForm = this.fb.group({
+                  email: ['', [Validators.required, Validators.email]],
+                  password: ['', [Validators.required, Validators.minLength(8)]],
+                });
   }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-    });
+    const token = localStorage.getItem('token');
+      if (token) {
+        this.redirectUsers(); // Redirige si el token ya está almacenado
+      }
+
   }
 
 
@@ -59,14 +63,14 @@ export class LoginComponent implements OnInit{
   }
 
   // Método para manejar el envío del formulario
-  async onSubmit(): Promise<void> {
+  async login(): Promise<void> {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
+
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
       try {
-        const response = await this.loginService.login(email, password);
+        const response = await this.loginService.login({ email, password });
         this.authTokenService.setToken(response.token);
-        this.successMessage = `Login successful. Token: ${response.token}`;
-        this.errorMessage = '';
         this.redirectUsers();
       } catch (error) {
         this.errorMessage = 'Invalid credentials. Please try again.';

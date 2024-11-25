@@ -9,22 +9,25 @@ import { LoginResponse } from '@shared/interfaces/LoginResponse.interface';
 export class LoginService {
 
   private readonly apiUrl = environment.API;
-
   constructor(private readonly http: HttpClient) {}
 
   /**
   * El nombre de este metodo no debería ser cambiado, pero de ser necesario podrías cambiar la firma
    * */
-  async login(email: string, password: string): Promise<LoginResponse> {
-    const body = { email, password };
+  async login(credentials: { email: string; password: string }): Promise<LoginResponse> {
     try {
-      const response = await this.http.post<LoginResponse>(`${this.apiUrl}/login`, body).toPromise();
+      // Hacer la solicitud POST usando HttpClient y toPromise
+      const response = await this.http
+        .post<LoginResponse>(`${this.apiUrl}/login`, credentials)
+        .toPromise();
+
       return response;
-    } catch (error) {
-      throw new Error('Invalid credentials');
+    } catch (error: any) {
+      // Manejo del error con un mensaje claro
+      const errorMessage = error?.error?.error || 'Invalid credentials';
+      throw new Error(errorMessage);
     }
   }
-
 
 
 
